@@ -18,7 +18,7 @@ class ArticleController extends Controller
     public function index()
     {
         $posts = Post::all();
-        dd($posts);w
+        dd($posts);
 
         return 'Liste des article';
 

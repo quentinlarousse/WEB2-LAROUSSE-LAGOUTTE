@@ -19,6 +19,7 @@
         body {
             font-family: 'Lato';
 
+
         }
 
         .fa-btn {
@@ -49,6 +50,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -74,6 +76,8 @@
     </nav>
 
     @yield('content')
+
+    @yield('sidebar')
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

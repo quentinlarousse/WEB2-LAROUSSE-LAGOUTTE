@@ -14,7 +14,7 @@
 
 Route::resource('/articles','ArticleController');
 
-Route::get('/propos','PagesController@about');
+Route::resource('/propos','PagesController');
 
 /*
 |--------------------------------------------------------------------------
