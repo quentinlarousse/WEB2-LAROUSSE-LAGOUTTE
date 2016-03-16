@@ -31,6 +31,8 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
+Route::get('profil', ['uses' => 'UsersController@getEdit', 'as' => 'profil']);
+
 
 
 

@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function getEdit(){
 
         $user = Auth::user();
-        return view('user.edit', compact('user'));
+        return view('users.edit', compact('user'));
 
     }
 }
