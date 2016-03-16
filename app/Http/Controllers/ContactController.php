@@ -2,19 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class ContactController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth')->only(['edit']);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('auth/users/edituser');
+        //
     }
 
     /**
@@ -32,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -43,7 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -54,9 +47,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = Auth::findOrFail($id);
-
-        return view('users.show', compact('user'));
+        //
     }
 
     /**
@@ -67,8 +58,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::findOrFail($id);
-        return view('users.edit', compact('user'));
+        //
     }
 
     /**
@@ -80,16 +70,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this -> validate($request, [
-            'name' => 'required',
-            'mail' => 'required'
-        ]);
-
-        $user = Auth::findOrFail($id);
-        $input = $request->input();
-        $user->fill($input)->save();
-
-        return redirect() -> route('user.index') -> with('success', 'Votre profil a bien été modifié');
+        //
     }
 
     /**
@@ -100,6 +81,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +18,7 @@ class Post extends Model
     }
 
     public function user() {
-        return $this->belongsto('App\User');
+        return $this->belongsto('App\Models\User');
     }
 
 
