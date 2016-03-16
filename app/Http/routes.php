@@ -54,6 +54,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/user', 'UserController@index');
 
+    Route::get('/contact', 'ContactController@index');
+
 
 
     Route::get('/', function () {

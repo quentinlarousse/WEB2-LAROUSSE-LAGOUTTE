@@ -6,16 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ContactController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['edit']);
+    }
+
     public function index()
     {
-        return view('contact/contact');;
+        return view('auth/users/edituser');
     }
 
     /**
@@ -47,7 +53,9 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::findOrFail($id);
+
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -58,7 +66,8 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Auth::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -70,7 +79,16 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request, [
+            'name' => 'required',
+            'mail' => 'required'
+        ]);
+
+        $user = Auth::findOrFail($id);
+        $input = $request->input();
+        $user->fill($input)->save();
+
+        return redirect() -> route('user.index') -> with('success', 'Votre profil a bien été modifié');
     }
 
     /**
