@@ -18,6 +18,8 @@ Route::resource('/articles','ArticleController');
 
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,9 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::resource('/propos','PagesController');
 
-Route::get('/', function () {
-    return view('users.edit ');
-});
+
 
 
 
@@ -49,6 +49,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+
+    Route::resource('/user', 'UserController');
 
 
 
