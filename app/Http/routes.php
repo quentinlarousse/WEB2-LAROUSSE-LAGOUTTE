@@ -14,7 +14,9 @@
 
 Route::resource('/articles','ArticleController');
 
-Route::resource('/propos','PagesController');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,13 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::get('profil', ['uses' => 'UsersController@getEdit', 'as' => 'profil']);
+Route::resource('/propos','PagesController');
+
+Route::get('/', function () {
+    return view('users.edit ');
+});
+
+
 
 
 

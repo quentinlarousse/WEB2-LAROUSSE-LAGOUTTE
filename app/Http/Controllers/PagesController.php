@@ -22,9 +22,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $list = Post::paginate(10);
 
-        return view('pages.index', compact('list'));
+
+        return view('pages.index');
     }
 
     /**
