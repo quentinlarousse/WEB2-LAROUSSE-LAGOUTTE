@@ -15,9 +15,31 @@
 
     <style>
         body {
-            font-family: 'Lato';
+            background-color: #5C5C5C;
 
 
+
+
+        }
+
+        .navbar-inverse{
+            background-color: #0a68b4;
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav>li>a:hover {
+            color: black;
+        }
+
+
+
+        .navbar-inverse .navbar-brand{
+
+            color: black;
         }
 
         .fa-btn {
@@ -50,6 +72,7 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
                     <li><a href="{{ url('/articles') }}">articles</a></li>
+                    <li><a href="{{ url('/articles/create') }}">Rédiger articles</a></li>
                     
                 </ul>
 

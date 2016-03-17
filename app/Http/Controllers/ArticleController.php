@@ -24,6 +24,7 @@ class ArticleController extends Controller
     public function index()
     {
         $posts = Post::all();
+        ($posts);
 
         return view('articles.index')
             ->with(compact('posts'));

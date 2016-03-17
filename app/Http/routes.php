@@ -12,7 +12,9 @@
 */
 
 
-Route::resource('/articles','ArticleController');
+
+
+
 
 
 
@@ -32,7 +34,7 @@ Route::resource('/articles','ArticleController');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
 });
 
 Route::resource('/propos','PagesController');
@@ -55,6 +57,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/user', 'UserController@index');
 
     Route::get('/contact', 'ContactController@index');
+
+    Route::resource('/articles','ArticleController');
 
 
 
