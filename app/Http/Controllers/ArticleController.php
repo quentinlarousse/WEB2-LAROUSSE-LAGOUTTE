@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -15,12 +17,16 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $posts = Post::all();
-        dd($posts);
 
-        return 'Liste des article';
+        return view('articles.index')
+            ->with(compact('posts'));
 
 
     }
@@ -32,12 +38,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-       $post = new Post;
-        $post->all();
-       $post->title = 'un autre article';
-       $post->description = 'une autre description';
-       $post->save();
-       return 'Formulaire';
+        $users = User::all()->lists('name', 'id');
+
+        return view('articles.create')->with(compact('users'));
     }
 
     /**
@@ -46,9 +49,24 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\ValidatePostRequest $request)
     {
-        //
+        //Méthode 1
+        $post = new Post;
+
+        $post->user_id      = $request->user()->id;
+        $post->title        = $request->title;
+        $post->description  = $request->description;
+
+        $post->save();
+
+
+        //Méthode 2
+        //$data = $request->except('_token');
+        //$data['user_id'] = $request->user()->id;
+        //$post = Post::create($data);
+
+        return redirect()->route('articles.show', $post->id);
     }
 
     /**
@@ -61,11 +79,11 @@ class ArticleController extends Controller
     {
         $post = Post::find($id);
 
-        if($post){
-            return $post->title;
-        }else{
-            return 'N\'existe pas';
+        if(!$post) {
+            return redirect()->to('/articles');
         }
+
+        return view('articles.show')->with(['article' => $post]);
     }
 
     /**
@@ -76,7 +94,14 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::all()->lists('name', 'id');
+        $post  = Post::find($id);
+
+        if(!$post) {
+            return redirect()->to('/articles');
+        }
+
+        return view('articles.edit')->with(compact('users', 'post'));
     }
 
     /**
@@ -86,9 +111,21 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\ValidatePostRequest $request, $id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!$post) {
+            return redirect()->to('/articles');
+        }
+
+        $post->title        = $request->title;
+        $post->description  = $request->description;
+        $post->user_id      = $request->user_id;
+
+        $post->save();
+
+        return redirect()->route('articles.show', $post->id);
     }
 
     /**
@@ -99,6 +136,14 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!$post) {
+            return redirect()->route('articles.index');
+        }
+
+        $post->delete();
+
+        return redirect()->route('articles.index');
     }
 }

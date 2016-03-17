@@ -9,16 +9,19 @@ class Post extends Model
     /**
      * @param $id
      */
+
+    protected $fillable = [
+        'user_id', 'title', 'description'
+    ];
+
     public static function find($id)
     {
     }
 
-    public static function paginate($int)
-    {
-    }
+
 
     public function user() {
-        return $this->belongsto('App\Models\User');
+        return $this->belongsto('App\User');
     }
 
 
