@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+/**
+ * @property Guard auth
+ */
 class UserController extends Controller
 {
     /**
@@ -14,9 +18,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+    public function __construct(Guard $auth)
     {
         $this->middleware('auth')->only(['edit']);
+        $this->auth = $auth;
     }
 
     public function index()
@@ -64,9 +69,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $user = Auth::findOrFail($id);
+        $user = $this->auth->user();
         return view('users.edit', compact('user'));
     }
 
@@ -77,18 +82,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Guard $auth, Request $request)
     {
-        $this -> validate($request, [
-            'name' => 'required',
-            'mail' => 'required'
+        $user = $this->auth->user();
+        $this->validate($request, [
+            'name' => "required|unique:users,email,{$user->id}|min:2"
         ]);
 
-        $user = Auth::findOrFail($id);
-        $input = $request->input();
-        $user->fill($input)->save();
+    $user->update($request->only('name', 'firstname', 'lastname'));
+    return redirect()->with('success', 'Votre profil a bien été modifier');
 
-        return redirect() -> route('user.index') -> with('success', 'Votre profil a bien été modifié');
     }
 
     /**

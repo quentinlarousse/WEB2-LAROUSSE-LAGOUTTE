@@ -39,9 +39,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::resource('/propos','PagesController');
 
-Route::get('/', function () {
-    return view('users.edit ');
-});
+
 
 
 
@@ -55,6 +53,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::get('/user', 'UserController@index');
+
+    Route::post('/user', 'UserController@edit');
 
     Route::get('/contact', 'ContactController@index');
 
