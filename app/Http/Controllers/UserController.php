@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @property Guard auth
@@ -82,16 +84,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Guard $auth, Request $request)
+    public function update(Request $request, $id)
     {
-        $user = $this->auth->user();
-        $this->validate($request, [
-            'name' => "required|unique:users,email,{$user->id}|min:2"
-        ]);
-
-    $user->update($request->only('name', 'firstname', 'lastname'));
-    return redirect()->with('success', 'Votre profil a bien été modifier');
-
+        $user = User::findorFail($id);
+        $input = $request->input();
+        $input['password'] = Hash::make($request->password);
+        $user->fill($input)->save();
+        return redirect()->back();
     }
 
     /**
