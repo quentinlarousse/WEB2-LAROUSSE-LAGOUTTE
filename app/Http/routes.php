@@ -60,6 +60,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('/articles','ArticleController');
 
+    Route::get('/bap','BAPController@index');
+
 
 
     Route::get('/', function () {

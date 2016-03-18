@@ -73,6 +73,7 @@
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
                     <li><a href="{{ url('/articles') }}">articles</a></li>
                     <li><a href="{{ url('/articles/create') }}">Rédiger articles</a></li>
+                    <li><a href="{{ url('/bap') }}">Envoyer projet BAP</a></li>
                     
                 </ul>
 

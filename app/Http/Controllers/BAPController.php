@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ContactController extends Controller
+class BAPController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact/contact');
+        return view('bap/bap');
     }
 
     /**
@@ -25,7 +25,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
