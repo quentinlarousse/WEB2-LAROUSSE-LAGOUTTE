@@ -15,7 +15,7 @@
 
     <style>
         body {
-            background-color: #5C5C5C;
+            background-image: url('../laravel_img.jpg');
 
 
 
@@ -89,7 +89,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/user') }}">Mon profile</a></li>
+                                <li><a href="{{ url('/user') }}">Mon profil</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

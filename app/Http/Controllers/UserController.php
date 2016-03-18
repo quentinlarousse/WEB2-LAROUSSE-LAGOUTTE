@@ -89,7 +89,7 @@ class UserController extends Controller
         $user = User::findorFail($id);
         $input = $request->input();
         $input['password'] = Hash::make($request->password);
-        $user->fill($input)->save();
+        $input['name'] ;
         return redirect()->back();
     }
 
